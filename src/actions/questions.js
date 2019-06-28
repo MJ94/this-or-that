@@ -12,7 +12,9 @@ export const saveQuestion = question => ({
   question,
 });
 
-export const saveAnswer = answer => ({
+export const saveAnswer = ({ authedUser, qid, answer }) => ({
   type: SAVE_ANSWER,
+  authedUser,
+  qid,
   answer,
 });
