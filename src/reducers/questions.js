@@ -18,7 +18,7 @@ const questions = (state = {}, action) => {
         ...action.questions,
       };
     default:
-      break;
+      return state;
   }
 };
 
