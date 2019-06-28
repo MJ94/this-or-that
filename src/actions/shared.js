@@ -5,9 +5,11 @@ import { setAuthedUser } from './authedUsers';
 
 const AUTHED_ID = 'tylermcginnis';
 
-export const handleInitialData = () => dispatch => getInitialData()
+const handleInitialData = () => dispatch => getInitialData()
   .then(({ users, questions }) => {
     dispatch(receiveUsers(users));
     dispatch(getQuestions(questions));
     dispatch(setAuthedUser(AUTHED_ID));
   });
+
+export default handleInitialData;
