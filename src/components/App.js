@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { handleInitialData } from '../actions/shared';
 import Login from './Login';
+import NavBar from './NavBar';
 
 class App extends Component {
   componentDidMount() {
@@ -12,11 +12,10 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col><Login /></Col>
-        </Row>
-      </Container>
+      <Fragment>
+        <NavBar />
+        <Login />
+      </Fragment>
     );
   }
 }
