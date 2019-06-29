@@ -1,15 +1,30 @@
-import { getInitialData } from '../utils/api';
-import { receiveUsers } from './users';
-import { getQuestions } from './questions';
-import { setAuthedUser } from './authedUser';
+import { showLoading, hideLoading } from 'react-redux-loading';
+import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
+import { receiveUsers, addUserAnswer } from './users';
+import { getQuestions, saveAnswer } from './questions';
 
-const AUTHED_ID = 'tylermcginnis';
+export const handleInitialData = () => (dispatch) => {
+  dispatch(showLoading());
+  return Promise.all([_getUsers, _getQuestions()])
+    .then(([users, questions]) => {
+      dispatch(receiveUsers(users));
+      dispatch(getQuestions(questions));
+      dispatch(hideLoading());
+    });
+};
 
-const handleInitialData = () => dispatch => getInitialData()
-  .then(({ users, questions }) => {
-    dispatch(receiveUsers(users));
-    dispatch(getQuestions(questions));
-    dispatch(setAuthedUser(AUTHED_ID));
-  });
+export const handleSaveAnswer = (qid, answer) => (dispatch, getState) => {
+  const { authedUser } = getState();
 
-export default handleInitialData;
+  dispatch(showLoading());
+  return _saveQuestionAnswer({
+    authedUser,
+    qid,
+    answer,
+  })
+    .then(() => {
+      dispatch(saveAnswer(authedUser, qid, answer));
+      dispatch(addUserAnswer(authedUser, qid, answer));
+    })
+    .then(() => dispatch(hideLoading()));
+};
