@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { handleInitialData } from '../actions/shared';
 import Login from './Login';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
+
   render() {
     return (
       <Container>
@@ -13,3 +20,9 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect()(App);
