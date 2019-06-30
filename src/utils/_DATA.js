@@ -1,8 +1,12 @@
+import michael from '../images/michael.jpg';
+import sabrina from '../images/sabrina.jpg';
+import emily from '../images/emily.jpg';
+
 let users = {
   michaeljackson: {
     id: 'michaeljackson',
     name: 'Michael Jackson',
-    avatarURL: 'src/images/michael.jpg',
+    avatarURL: michael,
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -14,7 +18,7 @@ let users = {
   sabrinatolle: {
     id: 'sabrinatolle',
     name: 'Sabrina Tolle',
-    avatarURL: 'src/images/sabrina.jpg',
+    avatarURL: sabrina,
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +28,7 @@ let users = {
   emilyjackson: {
     id: 'emilyjackson',
     name: 'Emily Jackson',
-    avatarURL: 'src/images/emily.jpg',
+    avatarURL: emily,
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',

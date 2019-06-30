@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unsetAuthedUser } from '../actions/authedUser';
+import User from './User';
 
 class NavBar extends Component {
   state = {
@@ -27,13 +28,13 @@ class NavBar extends Component {
   }
 
   render() {
-    const { isloggedIn } = this.props;
+    const { authedUser } = this.props;
 
     return (
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand tag={Link} to="/">This Or That</NavbarBrand>
-          {isloggedIn
+          {authedUser
             && (
               <Fragment>
                 <NavbarToggler onClick={this.toggle} />
@@ -47,6 +48,9 @@ class NavBar extends Component {
                     </NavItem>
                     <NavItem>
                       <NavLink tag={Link} to="/add">Add Questions</NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <User id={authedUser} />
                     </NavItem>
                     <NavItem>
                       <NavLink onClick={this.props.logout}>Logout</NavLink>
@@ -64,12 +68,12 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   logout: PropTypes.func.isRequired,
-  isloggedIn: PropTypes.bool.isRequired,
+  authedUser: PropTypes.string,
 };
 
 function mapStateToProps({ authedUser }) {
   return {
-    isloggedIn: authedUser !== null,
+    authedUser,
   };
 }
 
@@ -80,5 +84,9 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
+
+NavBar.propTypes = {
+  authedUser: PropTypes.string,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
