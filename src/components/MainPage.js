@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import NavBar from './NavBar';
 
 class MainPage extends Component {
   render() {
     return (
-      <div>
-        Main Page
-      </div>
+      <Fragment>
+        <NavBar />
+        <div>Main Page</div>
+      </Fragment>
     );
   }
 }

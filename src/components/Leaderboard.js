@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import NavBar from './NavBar';
 
 class Leaderboard extends Component {
   render() {
     return (
-      <div>
-        Leaderboard
-      </div>
+      <Fragment>
+        <NavBar />
+        <div>Leaderboard</div>
+      </Fragment>
     );
   }
 }
