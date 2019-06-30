@@ -3,7 +3,7 @@ import { _saveQuestion } from '../utils/_DATA';
 
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SAVE_QUESTION = 'SAVE_QUESTION';
-export const SAVE_ANSWER = 'SAVE_ANSWER';
+export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER';
 
 export const getQuestions = questions => ({
   type: GET_QUESTIONS,
@@ -31,7 +31,7 @@ export const handleSaveQuestion = (optionOneText, optionTwoText) => (dispatch, g
 
 
 export const saveAnswer = ({ authedUser, qid, answer }) => ({
-  type: SAVE_ANSWER,
+  type: SAVE_QUESTION_ANSWER,
   authedUser,
   qid,
   answer,

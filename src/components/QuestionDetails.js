@@ -1,15 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import NavBar from './NavBar';
 
-class NewPoll extends Component {
+class QuestionDetails extends Component {
   render() {
     return (
       <Fragment>
         <NavBar />
-        <div>New Poll Page</div>
+        <div>Question Details Page</div>
       </Fragment>
     );
   }
 }
 
-export default NewPoll;
+export default QuestionDetails;

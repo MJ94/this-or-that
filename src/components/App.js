@@ -8,9 +8,9 @@ import { handleInitialData } from '../actions/shared';
 import Login from './Login';
 import NavBar from './NavBar';
 import MainPage from './MainPage';
-import PollDetails from './PollDetails';
+import QuestionDetails from './QuestionDetails';
 import Leaderboard from './Leaderboard';
-import NewPoll from './NewPoll';
+import NewQuestion from './NewQuestion';
 import NotFound from './NotFound';
 
 
@@ -34,8 +34,8 @@ class App extends Component {
                   : (
                     <Fragment>
                       <Route path="/" exact component={MainPage} />
-                      <Route path="/questions/:id" component={PollDetails} />
-                      <Route path="/add" component={NewPoll} />
+                      <Route path="/questions/:id" component={QuestionDetails} />
+                      <Route path="/add" component={NewQuestion} />
                       <Route path="/leaderboard" component={Leaderboard} />
                     </Fragment>
                   )

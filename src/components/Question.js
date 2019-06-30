@@ -3,30 +3,30 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Card, CardBody, CardTitle } from 'reactstrap';
 
-const Poll = (props) => {
-  const { poll } = props;
+const Question = (props) => {
+  const { question } = props;
   return (
     <Card>
       <CardBody>
         <CardTitle>Would you pick This or That?</CardTitle>
         <ul>
-          <li>{poll.optionOne.text}</li>
-          <li>{poll.optionTwo.text}</li>
+          <li>{question.optionOne.text}</li>
+          <li>{question.optionTwo.text}</li>
         </ul>
       </CardBody>
     </Card>
   );
 };
 
-Poll.propTypes = {
+Question.propTypes = {
   id: PropTypes.string.isRequired,
-  poll: PropTypes.object.isRequired,
+  question: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ polls }, { id }) {
+function mapStateToProps({ questions }, { id }) {
   return {
-    poll: polls[id],
+    question: questions[id],
   };
 }
 
-export default connect(mapStateToProps)(Poll);
+export default connect(mapStateToProps)(Question);
