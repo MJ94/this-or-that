@@ -5,7 +5,7 @@ import { getQuestions, saveAnswer } from './questions';
 
 export const handleInitialData = () => (dispatch) => {
   dispatch(showLoading());
-  return Promise.all([_getUsers, _getQuestions()])
+  return Promise.all([_getUsers(), _getQuestions()])
     .then(([users, questions]) => {
       dispatch(receiveUsers(users));
       dispatch(getQuestions(questions));
