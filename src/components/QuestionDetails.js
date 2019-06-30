@@ -40,7 +40,7 @@ class QuestionDetails extends Component {
           <User id={questionAuthor.id} />
         </CardHeader>
         <CardBody>
-          <CardTitle>This Or That?</CardTitle>
+          <CardTitle>Would you rather...?</CardTitle>
           {isAnswered
             ? (
               <ul>

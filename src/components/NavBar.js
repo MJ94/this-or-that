@@ -33,7 +33,7 @@ class NavBar extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand tag={Link} to="/">This Or That</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">This Or That? (Would You Rather?)</NavbarBrand>
           {authedUser
             && (
               <Fragment>

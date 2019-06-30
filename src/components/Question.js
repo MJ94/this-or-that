@@ -14,7 +14,7 @@ const Question = (props) => {
   return (
     <Card onClick={e => loadDetails(e, question.id)}>
       <CardBody>
-        <CardTitle>Would you pick This or That?</CardTitle>
+        <CardTitle>Would you rather...?</CardTitle>
         <ul>
           <li>{question.optionOne.text}</li>
           <li>{question.optionTwo.text}</li>
