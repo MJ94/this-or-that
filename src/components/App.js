@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoadingBar from 'react-redux-loading-bar';
@@ -11,6 +11,7 @@ import MainPage from './MainPage';
 import PollDetails from './PollDetails';
 import Leaderboard from './Leaderboard';
 import NewPoll from './NewPoll';
+import NotFound from './NotFound';
 
 
 class App extends Component {
@@ -27,17 +28,20 @@ class App extends Component {
           <LoadingBar />
           <NavBar />
           <Container>
-            {
-              notLoggedIn ? <Route path="/" component={Login} />
-                : (
-                  <div>
-                    <Route path="/" exact component={MainPage} />
-                    <Route path="/questions/:id" component={PollDetails} />
-                    <Route path="/add" component={NewPoll} />
-                    <Route path="/leaderboard" component={Leaderboard} />
-                  </div>
-                )
-            }
+            <Switch>
+              {
+                notLoggedIn ? <Route path="/" exact component={Login} />
+                  : (
+                    <Fragment>
+                      <Route path="/" exact component={MainPage} />
+                      <Route path="/questions/:id" component={PollDetails} />
+                      <Route path="/add" component={NewPoll} />
+                      <Route path="/leaderboard" component={Leaderboard} />
+                    </Fragment>
+                  )
+              }
+              <Route component={NotFound} />
+            </Switch>
           </Container>
         </Fragment>
       </Router>
