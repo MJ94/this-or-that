@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import NavBar from './NavBar';
 
 class MainPage extends Component {
   render() {
