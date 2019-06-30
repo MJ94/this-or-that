@@ -1,15 +1,32 @@
-import React, { Component, Fragment } from 'react';
-import NavBar from './NavBar';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class QuestionDetails extends Component {
   render() {
+    const { question } = this.props;
+
+    if (!question) {
+      return <Redirect to="/NotFound" />;
+    }
+
     return (
-      <Fragment>
-        <NavBar />
-        <div>Question Details Page</div>
-      </Fragment>
+      <div>Question Details</div>
     );
   }
 }
 
-export default QuestionDetails;
+const mapStateToProps = ({ questions }, props) => {
+  const { id } = props.match.params;
+  const question = questions[id];
+  return {
+    question,
+  };
+};
+
+QuestionDetails.propTypes = {
+  question: PropTypes.object,
+};
+
+export default connect(mapStateToProps)(QuestionDetails);
