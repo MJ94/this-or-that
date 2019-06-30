@@ -16,7 +16,7 @@ import NotFound from './NotFound';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleInitialData();
   }
 
   render() {
@@ -49,17 +49,21 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = ({ authedUser }) => ({
+  notLoggedIn: authedUser === null,
+});
 
-function mapStateToProps({ authedUser }) {
-  return {
-    notLoggedIn: authedUser === null,
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  handleInitialData: () => {
+    dispatch(handleInitialData());
+  },
+});
+
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  handleInitialData: PropTypes.func.isRequired,
   notLoggedIn: PropTypes.bool.isRequired,
 };
 
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
