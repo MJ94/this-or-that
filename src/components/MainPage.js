@@ -5,7 +5,6 @@ class MainPage extends Component {
   render() {
     return (
       <Fragment>
-        <NavBar />
         <div>Main Page</div>
       </Fragment>
     );
