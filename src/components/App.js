@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import LoadingBar from 'react-redux-loading-bar';
 import { handleInitialData } from '../actions/shared';
 import Login from './Login';
 import NavBar from './NavBar';
