@@ -51,26 +51,26 @@ class QuestionDetails extends Component {
               <li>{question.optionTwo.text} ({optionTwoVotes} vote(s) at {percentageOptionTwo}%){!isOptionOneAnswered ? checkmark : null}</li>
             </ul>
             ) : (
-            <Form onSubmit={this.handleSubmit}>
-              <FormGroup tag="fieldset">
-                <FormGroup check>
-                  <Label check>
-                    <Input type="radio" name="radio1" value="optionOne" checked onChange={this.radioSelected} />
-                    {' '}
-                    {question.optionOne.text}
-                  </Label>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup tag="fieldset">
+                  <FormGroup check>
+                    <Label check>
+                      <Input type="radio" name="radio1" value="optionOne" checked onChange={this.radioSelected} />
+                      {' '}
+                      {question.optionOne.text}
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />
+                      {' '}
+                      {question.optionTwo.text}
+                    </Label>
+                  </FormGroup>
                 </FormGroup>
-                <FormGroup check>
-                  <Label check>
-                    <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />
-                    {' '}
-                    {question.optionTwo.text}
-                  </Label>
-                </FormGroup>
-              </FormGroup>
-              <Button>Submit</Button>
-            </Form>
-          )}
+                <Button>Submit</Button>
+              </Form>
+            )}
         </CardBody>
       </Card>
     );
