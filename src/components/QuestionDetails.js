@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Card, CardHeader, CardBody, CardTitle, FormGroup, Label, Input, Form, Button } from 'reactstrap';
+import { FaCheck } from 'react-icons/fa';
 import { handleSaveAnswer } from '../actions/shared';
 import User from './User';
 
@@ -23,7 +24,7 @@ class QuestionDetails extends Component {
   }
 
   render() {
-    const { question, questionAuthor, isAnswered } = this.props;
+    const { question, questionAuthor, isAnswered, isOptionOneAnswered } = this.props;
 
     if (!question) {
       return <Redirect to="/404" />;
@@ -34,6 +35,8 @@ class QuestionDetails extends Component {
     const percentageOptionOne = optionOneVotes / (optionOneVotes + optionTwoVotes) * 100;
     const percentageOptionTwo = optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100;
 
+    const checkmark = <FaCheck size="20" color="green" />;
+
     return (
       <Card>
         <CardHeader>
@@ -42,32 +45,32 @@ class QuestionDetails extends Component {
         <CardBody>
           <CardTitle>Would you rather...?</CardTitle>
           {isAnswered
-            ? (
-              <ul>
-                <li>{question.optionOne.text} ({optionOneVotes} vote(s) at {percentageOptionOne}%)</li>
-                <li>{question.optionTwo.text} ({optionTwoVotes} vote(s) at {percentageOptionTwo}%)</li>
-              </ul>
+          ? (
+            <ul>
+              <li>{question.optionOne.text} ({optionOneVotes} vote(s) at {percentageOptionOne}%){isOptionOneAnswered ? checkmark : null}</li>
+              <li>{question.optionTwo.text} ({optionTwoVotes} vote(s) at {percentageOptionTwo}%){!isOptionOneAnswered ? checkmark : null}</li>
+            </ul>
             ) : (
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup tag="fieldset">
-                  <FormGroup check>
-                    <Label check>
-                      <Input type="radio" name="radio1" value="optionOne" checked onChange={this.radioSelected} />
-                      {' '}
-                      {question.optionOne.text}
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Label check>
-                      <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />
-                      {' '}
-                      {question.optionTwo.text}
-                    </Label>
-                  </FormGroup>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup tag="fieldset">
+                <FormGroup check>
+                  <Label check>
+                    <Input type="radio" name="radio1" value="optionOne" checked onChange={this.radioSelected} />
+                    {' '}
+                    {question.optionOne.text}
+                  </Label>
                 </FormGroup>
-                <Button>Submit</Button>
-              </Form>
-            )}
+                <FormGroup check>
+                  <Label check>
+                    <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />
+                    {' '}
+                    {question.optionTwo.text}
+                  </Label>
+                </FormGroup>
+              </FormGroup>
+              <Button>Submit</Button>
+            </Form>
+          )}
         </CardBody>
       </Card>
     );
@@ -79,18 +82,22 @@ QuestionDetails.propTypes = {
   questionAuthor: PropTypes.object,
   isAnswered: PropTypes.bool.isRequired,
   saveAnswer: PropTypes.func.isRequired,
+  isOptionOneAnswered: PropTypes.bool.isRequired,
 };
+
 
 const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { id } = props.match.params;
   const question = questions[id];
   const questionAuthor = users[question.author];
-  const isAnswered = question.optionOne.votes.includes(authedUser) ||
-    question.optionTwo.votes.includes(authedUser);
+  const isOptionOneAnswered = question.optionOne.votes.includes(authedUser);
+  const isOptionTwoAnswered = question.optionTwo.votes.includes(authedUser);
+  const isAnswered = isOptionOneAnswered || isOptionTwoAnswered;
   return {
     question,
     questionAuthor,
     isAnswered,
+    isOptionOneAnswered,
   };
 };
 
