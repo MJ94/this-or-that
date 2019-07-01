@@ -33,8 +33,8 @@ class QuestionDetails extends Component {
 
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
-    const percentageOptionOne = optionOneVotes / (optionOneVotes + optionTwoVotes) * 100;
-    const percentageOptionTwo = optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100;
+    const percentageOptionOne = (optionOneVotes / (optionOneVotes + optionTwoVotes) * 100).toFixed(2);
+    const percentageOptionTwo = (optionTwoVotes / (optionOneVotes + optionTwoVotes) * 100).toFixed(2);
 
     const checkmark = <FaCheck size="20" color="green" />;
 
