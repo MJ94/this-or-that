@@ -31,6 +31,8 @@ class QuestionDetails extends Component {
       return <Redirect to="/NotFound" />;
     }
 
+    const { selectedAnswer } = this.state
+
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
     const percentageOptionOne = (optionOneVotes / (optionOneVotes + optionTwoVotes) * 100).toFixed(2);
@@ -67,7 +69,7 @@ class QuestionDetails extends Component {
                   </Label>
                 </FormGroup>
               </FormGroup>
-              <Button>Submit</Button>
+              <Button disabled={selectedAnswer === ''}>Submit</Button>
             </Form>
             )}
         </CardBody>
