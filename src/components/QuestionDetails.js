@@ -7,6 +7,7 @@ import { FaCheck } from 'react-icons/fa';
 import { handleSaveAnswer } from '../actions/shared';
 import User from './User';
 
+
 class QuestionDetails extends Component {
   state = {
     selectedAnswer: '',
@@ -27,7 +28,7 @@ class QuestionDetails extends Component {
     const { question, questionAuthor, isAnswered, isOptionOneAnswered } = this.props;
 
     if (!question) {
-      return <Redirect to="/404" />;
+      return <Redirect to="/NotFound" />;
     }
 
     const optionOneVotes = question.optionOne.votes.length;
@@ -45,31 +46,29 @@ class QuestionDetails extends Component {
         <CardBody>
           <CardTitle>Would you rather...?</CardTitle>
           {isAnswered
-          ? (
-            <ul>
+            ? (
+              <ul>
               <li>{question.optionOne.text} ({optionOneVotes} vote(s) at {percentageOptionOne}%){isOptionOneAnswered ? checkmark : null}</li>
               <li>{question.optionTwo.text} ({optionTwoVotes} vote(s) at {percentageOptionTwo}%){!isOptionOneAnswered ? checkmark : null}</li>
-            </ul>
+              </ul>
             ) : (
-              <Form onSubmit={this.handleSubmit}>
-                <FormGroup tag="fieldset">
-                  <FormGroup check>
-                    <Label check>
-                      <Input type="radio" name="radio1" value="optionOne" checked onChange={this.radioSelected} />
-                      {' '}
-                      {question.optionOne.text}
-                    </Label>
-                  </FormGroup>
-                  <FormGroup check>
-                    <Label check>
-                      <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />
-                      {' '}
-                      {question.optionTwo.text}
-                    </Label>
-                  </FormGroup>
+            <Form onSubmit={this.handleSubmit}>
+              <FormGroup tag="fieldset">
+                <FormGroup check>
+                  <Label check>
+                    <Input type="radio" name="radio1" value="optionOne" onChange={this.radioSelected} />{' '}
+                    {question.optionOne.text}
+                  </Label>
                 </FormGroup>
-                <Button>Submit</Button>
-              </Form>
+                <FormGroup check>
+                  <Label check>
+                    <Input type="radio" name="radio1" value="optionTwo" onChange={this.radioSelected} />{' '}
+                    {question.optionTwo.text}
+                  </Label>
+                </FormGroup>
+              </FormGroup>
+              <Button>Submit</Button>
+            </Form>
             )}
         </CardBody>
       </Card>
@@ -84,7 +83,6 @@ QuestionDetails.propTypes = {
   saveAnswer: PropTypes.func.isRequired,
   isOptionOneAnswered: PropTypes.bool.isRequired,
 };
-
 
 const mapStateToProps = ({ questions, users, authedUser }, props) => {
   const { id } = props.match.params;
